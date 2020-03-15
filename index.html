@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <style>
+    body{
+      background-color: black;
+    }
+  </style>
+<script type="text/javascript">
+  var user;
+  
+function foo(response) {
+  var data = response.data;
+ //console.log(meta);
+  console.log(data);
+  //length
+  var length = data.length;
+  //name
+  var name = data[0].name;
+  //url
+  var url = data[0].html_url;
+  //description
+  var description = data[0].description;
+  //owner
+  var owner = data[0].owner.login;
+  //img
+  var img = "https://raw.githubusercontent.com/" + data[0].owner.login + "/" + data[1].name + "/master/icon.png";
+  
+  for(var i = 0; i < length; i++ ){
+var card = 
+" <div class='card' style='width: 18rem;'>" +
+    "<img src=" + "'https://raw.githubusercontent.com/" + data[i].owner.login + "/" + data[i].name + "/master/icon.png'" + " class='card-img-top' alt='img'>" +
+    "<div class='card-body'>" +
+      "<h5 class='card-title'>" + data[i].name + "</h5>" +
+      "<p class='card-text'>" + data[i].description + "</p>" +
+      "<a href='" + data[i].html_url + "' class='btn btn-primary'>Open</a></div></div>";
+    document.getElementById('main').innerHTML += card;  
+  }
+  
+}
+
+  function updateuser(){
+    user = document.getElementById("user").innerHTML;
+    var script = document.createElement('script');
+script.src = 'https://api.github.com/users/' + user + '/repos?callback=foo';
+
+document.getElementsByTagName('head')[0].appendChild(script);
+  }
+  
+    var script = document.createElement('script');
+script.src = 'https://api.github.com/users/DrawD3lle/repos?callback=foo';
+
+document.getElementsByTagName('head')[0].appendChild(script);
+  
+</script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+  <!--<input type="text" id="user" title="user"><button id="search" onclick="setuser()">Search</button>-->
+  <div class="row" id="main"></div>
+  
+  <!--Only for Bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
